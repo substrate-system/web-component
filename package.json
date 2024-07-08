@@ -1,5 +1,5 @@
 {
-  "name": "@subtrate-system/web-component",
+  "name": "@substrate-system/web-component",
   "type": "module",
   "version": "0.0.0",
   "main": "dist/index.js",
