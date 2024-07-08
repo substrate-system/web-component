@@ -1,44 +1,63 @@
-import { createDebug } from '@bicycle-codes/debug'
-const debug = createDebug()
+// import Debug from '@bicycle-codes/debug'
+// const debug = Debug()
 
-export class Example extends HTMLElement {
-    constructor () {
-        super()
+export abstract class WebComponent extends HTMLElement {
+    static get NAME ():string
+    // NAME:string = 'aaa'
+    // get NAME ():string {
+    //     return ''
+    // }
 
-        this.innerHTML = `<div>
-            <p>example</p>
-            <ul>
-                ${Array.from(this.children).filter(Boolean).map(node => {
-                    return `<li>${node.outerHTML}</li>`
-                }).join('')}
-            </ul>
-        </div>`
+    static event (evType:string) {
+        const namespace = this.NAME
+        return `${namespace}:${evType}`
     }
 
     // Define the attributes to observe
-    static observedAttributes = ['exmaple', 'attribute']
+    // static observedAttributes = ['exmaple', 'attribute']
 
-    attributeChangedCallback (name:string, oldValue:string, newValue:string) {
-        debug('an attribute changed', name, oldValue, newValue)
-    }
+    // attributeChangedCallback (name:string, oldValue:string, newValue:string) {
+    //     debug('an attribute changed', name, oldValue, newValue)
+    // }
 
-    disconnectedCallback () {
-        debug('disconnected')
-    }
-
-    connectedCallback () {
-        debug('connected')
-
-        const observer = new MutationObserver(function (mutations) {
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes.length) {
-                    debug('Node added: ', mutation.addedNodes)
-                }
-            })
+    /**
+     * Emit a namespaced event.
+     *
+     * @param type event type string
+     * @param detail detail property for event
+     * @param opts `bubbles` and `cancelable`, default to true for both
+     * @returns {boolean}
+     */
+    emit (
+        type:string,
+        detail:CustomEvent['detail'] = {},
+        opts:Partial<{ bubbles:boolean, cancelable:boolean }> = {}
+    ):boolean {
+        const namespace = this.NAME
+        const event = new CustomEvent(`${namespace}:${type}`, {
+            bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,
+            cancelable: (opts.cancelable === undefined) ? true : opts.cancelable,
+            detail
         })
 
-        observer.observe(this, { childList: true })
+        return this.dispatchEvent(event)
     }
-}
 
-customElements.define('example-component', Example)
+    // disconnectedCallback () {
+    //     debug('disconnected')
+    // }
+
+    // connectedCallback () {
+    //     debug('connected')
+
+    //     const observer = new MutationObserver(function (mutations) {
+    //         mutations.forEach((mutation) => {
+    //             if (mutation.addedNodes.length) {
+    //                 debug('Node added: ', mutation.addedNodes)
+    //             }
+    //         })
+    //     })
+
+    //     observer.observe(this, { childList: true })
+    // }
+}
