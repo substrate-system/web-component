@@ -1,6 +1,3 @@
-import Debug from '@bicycle-codes/debug'
-const debug = Debug()
-
 export abstract class WebComponent extends HTMLElement {
     static NAME:string = ''
     NAME:string = ''
@@ -12,7 +9,7 @@ export abstract class WebComponent extends HTMLElement {
         }
     }
 
-    static event (evType:string) {
+    static event (evType:string):string {
         return eventName(this.NAME, evType)
     }
 
@@ -26,19 +23,31 @@ export abstract class WebComponent extends HTMLElement {
      */
     emit (
         type:string,
-        detail:CustomEvent['detail'] = {},
-        opts:Partial<{ bubbles:boolean, cancelable:boolean }> = {}
+        opts:Partial<{
+            bubbles:boolean,
+            cancelable:boolean,
+            detail:CustomEvent['detail']
+        }> = {}
     ):boolean {
         const namespace = this.NAME
         const event = new CustomEvent(`${namespace}:${type}`, {
             bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,
             cancelable: (opts.cancelable === undefined) ? true : opts.cancelable,
-            detail
+            detail: opts.detail
         })
 
-        debug('event', event.type)
-
         return this.dispatchEvent(event)
+    }
+
+    /**
+     * Create and emit an event, no namespacing.
+     */
+    dispatch (type:string, opts:Partial<{
+        bubbles,
+        cancelable,
+        detail
+    }>):boolean {
+        return this.dispatchEvent(new CustomEvent(type, opts))
     }
 }
 

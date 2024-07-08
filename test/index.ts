@@ -32,11 +32,24 @@ test('can emit namespaced events', t => {
 
     const el = document.querySelector('test-component')
     t.ok(el, 'should find an element')
-    el?.addEventListener(TestComponent.event('test'), ev => {
+    el?.addEventListener(TestComponent.event('test'), listener)
+    el?.emit('test', { detail: 'hello' })
+    el?.removeEventListener(TestComponent.event('test'), listener)
+
+    function listener (ev) {
         t.ok(ev, 'should get the custom event')
         t.equal(ev.detail, 'hello', 'should emit the event detail')
+    }
+})
+
+test('emit an event without namespacing', t => {
+    const el = document.querySelector('test-component')
+    t.plan(2)
+    el?.addEventListener('hello', ev => {
+        t.equal(ev.type, 'hello', 'should hear the event')
+        t.equal(ev.detail, 'example data', 'should get the event detail')
     })
-    el?.emit('test', 'hello')
+    el?.dispatch('hello', { detail: 'example data' })
 })
 
 test('use facotry function', t => {

@@ -6,29 +6,78 @@
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-A minimal base class to inherit from for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+A minimal parent class to extend for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
 This adds a method, `emit` to the component, that will dispatch a namespaced
-event name, so to avoid name collisions amongst events.
+event name, to avoid name collisions with events.
 
-The short version is that it turns a plain string, `change` into a string
-like this:
-
-```
-my-element:change
-```
-
-```js
-// get an instance
-const el = document.querySelector('my-element')
-// dispatch an event
-el?.emit('hello', 'some data')  // => `my-element:hello`
-```
+The short version is that it turns a plain string, like `change`, into a string
+like `my-element:change`.
 
 ## install
 
 ```sh
 npm i -S @substrate-system/web-component
+```
+
+## Example
+
+### Create a component
+Use the factory function to create a new web componenet:
+
+```js
+import { WebComponent } from '@substrate-system/web-component'
+
+class AnotherElement extends WebComponent.create('another-element') {
+    constructor () {
+        super()
+        this.innerHTML = `<div>
+            hello again
+        </div>`
+    }
+}
+
+customElements.define('another-element', AnotherElement)
+```
+
+### Add the component to the DOM
+```js
+document.body.innerHTML += '<another-element></another-element>'
+```
+
+### Listen for events
+
+Use a helper method, `WebComponent.event(name:string)`, to get the full,
+namespaced event name.
+
+```js
+// find the instance
+const el = document.querySelector('my-element')
+
+// get the full event name
+el?.addEventListener(MyElement.event('hello'), ev => {
+    console.log(ev.detail)  // => 'some data'
+})
+```
+
+### Emit an event from the instance
+
+Events are dispatched by DOM nodes.
+
+```js
+// find the instance
+const el = document.querySelector('my-element')
+
+// dispatch an event
+el?.emit('hello', { detail: 'some data' })  // => `my-element:hello`
+```
+
+### Emit a plain string event name
+Don't namespace the event name, just emit the literal string.
+
+```js
+const el = document.querySelector('my-element')
+el.dispatch('hello', { detail: { data: true } })
 ```
 
 ## API
@@ -45,30 +94,10 @@ const { WebComponent } = import '@substrate-system/web-component'
 const { WebCompponent } = require('@substrate-system/web-component')
 ```
 
-## Example
-
-Extend the class returned by the factory function, `.create`. This will make
-sure that your web component has the right property set as `.NAME`.
-
-```js
-import { WebComponent } from '@susbtrate-system/web-component'
-
-class MyElement extends WebComponent.create('my-element') {
-    // ...
-}
-
-customElements.define(MyElement.NAME, MyElement)
-
-// ...sometime in the future...
-
-const el = document.querySelector('my-element')
-el.emit('test', 'some data')
-// => emit an event like `my-element:test`
-```
-
 ## methods
 
-### `emit(name, data)`
+### `emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`
+
 This will dispatch a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
 
 That way we can use event bubbling while minimizing event name collisions.
@@ -99,18 +128,29 @@ el.addEventListener(MyElement.event('test'), ev => {
 el.emit('test', 'some data')  // dispatch `my-element:test` event
 ```
 
-### `event(name)`
+### `event (name:string):string`
 Return the namespaced event name.
 
-##### `event` example
+#### `event` example
+
 ```js
 MyElement.event('change')  // => 'my-element:change'
 ```
 
-## Develop
+### `dispatch(name:string, opts{ bubbles?, cancelable?, detail? }):boolean`
 
+Emit a plain string; don't namespace the event name.
+
+
+## Develop
 Start a localhost server:
 
 ```sh
 npm start
+```
+
+## Test
+
+```sh
+npm test
 ```

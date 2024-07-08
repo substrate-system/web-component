@@ -26,7 +26,7 @@ class MyElement extends WebComponent {
         this.querySelector('button')?.addEventListener('click', ev => {
             ev.preventDefault()
             debug('click')
-            this.emit('special-click', 'some data')
+            this.emit('special-click', { detail: 'some data' })
         })
     }
 }
@@ -38,16 +38,10 @@ document.body.innerHTML += `
 `
 
 const el = document.querySelector('my-element')
-// console.log('the element', el)
-debug('el instance of', el instanceof MyElement)
-el?.addEventListener(MyElement.event('special-click'), ev => {
-    debug('the event', ev)
-})
-
-debug('namespaced event....', MyElement.event('aaa'))
+debug('the namespaced event....', MyElement.event('aaa'))
 
 el?.addEventListener('my-element:special-click', ev => {
-    debug('got a special click!!!', ev)
+    debug('got a special click!!!', ev.detail)
 })
 el?.addEventListener(MyElement.event('special-click'), ev => {
     debug('got the click by using .event method', ev.detail)
