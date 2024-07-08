@@ -21,7 +21,7 @@ npm i -S @substrate-system/web-component
 ## Example
 
 ### Create a component
-Use the factory function to create a new web componenet:
+Use the factory function to create a new web component.
 
 ```js
 import { WebComponent } from '@substrate-system/web-component'
