@@ -6,13 +6,9 @@
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-A minimal parent class to extend for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+An extra minimal parent class for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
-This adds a method, `emit` to the component, that will dispatch a namespaced
-event name, to avoid name collisions with events.
-
-The short version is that it turns a plain string, like `change`, into a string
-like `my-element:change`.
+This extends the native `HTMLElement`, and adds some methods for events.
 
 ## install
 
@@ -54,14 +50,18 @@ namespaced event name.
 // find the instance
 const el = document.querySelector('my-element')
 
-// get the full event name
+// listen for namespaced events
 el?.addEventListener(MyElement.event('hello'), ev => {
     console.log(ev.detail)  // => 'some data'
 })
+
+// listen for non-namespaced events
+el?.addEventListener('hello', ev => {
+    console.log(ev.detail)  // => 'some data again'
+})
 ```
 
-### Emit an event from the instance
-
+### Emit a namespaced event from the instance
 Events are dispatched by DOM nodes.
 
 ```js
@@ -72,12 +72,14 @@ const el = document.querySelector('my-element')
 el?.emit('hello', { detail: 'some data' })  // => `my-element:hello`
 ```
 
-### Emit a plain string event name
+### Emit a plain string (not namespaced) event
 Don't namespace the event name, just emit the literal string.
 
 ```js
 const el = document.querySelector('my-element')
-el.dispatch('hello', { detail: { data: true } })
+
+// dispatch an event as plain string, not namespaced
+el?.dispatch('hello', { detail: 'some data again' })  // => `hello`
 ```
 
 ## API
@@ -141,6 +143,10 @@ MyElement.event('change')  // => 'my-element:change'
 
 Emit a plain string; don't namespace the event name.
 
+```js
+const el = document.querySelector('my-element')
+el.dispatch('change')  // => 'change' event
+```
 
 ## Develop
 Start a localhost server:

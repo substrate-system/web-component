@@ -1,32 +1,36 @@
 import './index.css'
 import { WebComponent } from '../src/index.js'
-// import { waitFor } from '@bicycle-codes/dom'
 import Debug from '@bicycle-codes/debug'
 const debug = Debug()
 
+// for docuement.querySelector
 declare global {
     interface HTMLElementTagNameMap {
         'my-element': MyElement;
     }
 }
 
-class MyElement extends WebComponent {
-    static NAME = 'my-element'
-    NAME = 'my-element'
-
+class MyElement extends WebComponent.create('my-element') {
     constructor () {
         super()
         this.innerHTML = `<div class="example">
             <p>example element</p>
-            <button>click</button>
+            <button class="namespaced">emit a namespaced event</button>
+            <button class="regular">emit a regular event</button>
         </div>`
     }
 
     connectedCallback () {
-        this.querySelector('button')?.addEventListener('click', ev => {
+        this.querySelector('button.namespaced')?.addEventListener('click', ev => {
             ev.preventDefault()
-            debug('click')
-            this.emit('special-click', { detail: 'some data' })
+            ev.stopPropagation()
+            this.emit('click', { detail: 'some data' })
+        })
+
+        this.querySelector('button.regular')?.addEventListener('click', ev => {
+            ev.preventDefault()
+            ev.stopPropagation()
+            this.dispatch('click', { detail: 'some more data' })
         })
     }
 }
@@ -40,9 +44,25 @@ document.body.innerHTML += `
 const el = document.querySelector('my-element')
 debug('the namespaced event....', MyElement.event('aaa'))
 
-el?.addEventListener('my-element:special-click', ev => {
-    debug('got a special click!!!', ev.detail)
+el?.addEventListener('my-element:click', ev => {
+    debug('got a namespaced click', ev.detail)
+    debug('the full event name: ', ev.type)
 })
-el?.addEventListener(MyElement.event('special-click'), ev => {
+
+el?.addEventListener(MyElement.event('click'), ev => {
     debug('got the click by using .event method', ev.detail)
+
+    document.querySelector('.last-event-content')!.innerHTML = `
+        <pre>${ev.type}</pre>
+        <pre>${ev.detail}</pre>
+    `
+})
+
+el?.addEventListener('click', ev => {
+    debug('got a regular click', ev.type)
+    debug('event data: ', ev.detail)
+    document.querySelector('.last-event-content')!.innerHTML = `
+        <pre>${ev.type}</pre>
+        <pre>${ev.detail}</pre>
+    `
 })

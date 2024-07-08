@@ -47,7 +47,13 @@ export abstract class WebComponent extends HTMLElement {
         cancelable,
         detail
     }>):boolean {
-        return this.dispatchEvent(new CustomEvent(type, opts))
+        const event = new CustomEvent(type, {
+            bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,
+            cancelable: (opts.cancelable === undefined) ? true : opts.cancelable,
+            detail: opts.detail
+        })
+
+        return this.dispatchEvent(event)
     }
 }
 

@@ -1,0 +1,7 @@
+.last-event {
+    width: fit-content;
+    padding: 2rem;
+    border: 2px solid;
+    min-width: 10rem;
+    min-height: 6rem;
+}
