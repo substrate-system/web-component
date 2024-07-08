@@ -52,7 +52,7 @@ test('emit an event without namespacing', t => {
     el?.dispatch('hello', { detail: 'example data' })
 })
 
-test('use facotry function', t => {
+test('use factory function', t => {
     document.body.innerHTML += '<another-element></another-element>'
     t.ok(document.querySelector('another-element'), 'should find the element')
     t.equal(AnotherElement.NAME, 'another-element',
