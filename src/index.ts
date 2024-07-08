@@ -1,24 +1,13 @@
-// import Debug from '@bicycle-codes/debug'
-// const debug = Debug()
+import Debug from '@bicycle-codes/debug'
+const debug = Debug()
 
 export abstract class WebComponent extends HTMLElement {
-    static get NAME ():string
-    // NAME:string = 'aaa'
-    // get NAME ():string {
-    //     return ''
-    // }
+    static NAME:string = ''
+    NAME:string = ''
 
     static event (evType:string) {
-        const namespace = this.NAME
-        return `${namespace}:${evType}`
+        return eventName(this.NAME, evType)
     }
-
-    // Define the attributes to observe
-    // static observedAttributes = ['exmaple', 'attribute']
-
-    // attributeChangedCallback (name:string, oldValue:string, newValue:string) {
-    //     debug('an attribute changed', name, oldValue, newValue)
-    // }
 
     /**
      * Emit a namespaced event.
@@ -40,24 +29,12 @@ export abstract class WebComponent extends HTMLElement {
             detail
         })
 
+        debug('event', event.type)
+
         return this.dispatchEvent(event)
     }
+}
 
-    // disconnectedCallback () {
-    //     debug('disconnected')
-    // }
-
-    // connectedCallback () {
-    //     debug('connected')
-
-    //     const observer = new MutationObserver(function (mutations) {
-    //         mutations.forEach((mutation) => {
-    //             if (mutation.addedNodes.length) {
-    //                 debug('Node added: ', mutation.addedNodes)
-    //             }
-    //         })
-    //     })
-
-    //     observer.observe(this, { childList: true })
-    // }
+function eventName (namespace:string, evType:string) {
+    return `${namespace}:${evType}`
 }

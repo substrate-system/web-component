@@ -11,12 +11,8 @@ declare global {
 }
 
 class MyElement extends WebComponent {
-    // static NAME = 'fooo'
-    // static get NAME () {
-    //     return 'my-element'
-    // }
-
     static NAME = 'my-element'
+    NAME = 'my-element'
 
     constructor () {
         super()
@@ -30,7 +26,7 @@ class MyElement extends WebComponent {
         this.querySelector('button')?.addEventListener('click', ev => {
             ev.preventDefault()
             debug('click')
-            this.emit('special-click')
+            this.emit('special-click', 'some data')
         })
     }
 }
@@ -41,8 +37,6 @@ document.body.innerHTML += `
     <my-element></my-element>
 `
 
-debug('bbbbbbbb', MyElement.event)
-
 const el = document.querySelector('my-element')
 // console.log('the element', el)
 debug('el instance of', el instanceof MyElement)
@@ -52,11 +46,9 @@ el?.addEventListener(MyElement.event('special-click'), ev => {
 
 debug('namespaced event....', MyElement.event('aaa'))
 
-el?.addEventListener('my-element:example', ev => {
-    debug('example event', ev)
-})
 el?.addEventListener('my-element:special-click', ev => {
     debug('got a special click!!!', ev)
 })
-// debug('the name', MyElement.NAME)
-el!.emit('example', { data: true })
+el?.addEventListener(MyElement.event('special-click'), ev => {
+    debug('got the click by using .event method', ev.detail)
+})
