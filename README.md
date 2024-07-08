@@ -18,6 +18,11 @@ This extends the native `HTMLElement`, adding some methods for events.
 npm i -S @substrate-system/web-component
 ```
 
+## tl;dr
+* use `.emit` to emit a namepsaced event
+* use `.dispatch` to emit a non-namespaced event
+* use `.event(name)` to get the namespaced event type
+
 ## Example
 
 ### Create a component
@@ -64,7 +69,6 @@ el?.addEventListener('hello', ev => {
 ```
 
 ### Emit a namespaced event from the instance
-Events are dispatched by DOM nodes.
 
 ```js
 // find the instance
@@ -102,15 +106,17 @@ const { WebCompponent } = require('@substrate-system/web-component')
 
 ### `emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`
 
-This will dispatch a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
+This will emit a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
 
-That way we can use event bubbling while minimizing event name collisions.
+The return value is the same as the native `.dispatchEvent` method,
 
-The convention is to take the `NAME` property, appended with `:event-name`.
+> returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
+
+Because the event is namespaced, we can use event bubbling while minimizing event name collisions.
+
+The naming convention is to take the `NAME` property of the class, and append a string `:event-name`.
 
 So `emit('test')` dispatches an event like `my-element:test`.
-
-In practice this looks like:
 
 ```js
 class MyElement {
@@ -132,6 +138,30 @@ el.addEventListener(MyElement.event('test'), ev => {
 el.emit('test', 'some data')  // dispatch `my-element:test` event
 ```
 
+-------------------------------------------------------------------
+
+### `dispatch (type, opts)`
+Create and emit an event, no namespacing. The return value is the same as the
+native `.dispatchEvent` method,
+
+> returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
+
+```ts
+dispatch (type:string, opts:Partial<{
+    bubbles,
+    cancelable,
+    detail
+}>):boolean
+```
+
+#### `dispatch` example
+```js
+const el = document.querySelector('my-element')
+el.dispatch('change')  // => 'change' event
+```
+
+-------------------------------------------------------------------
+
 ### `event (name:string):string`
 Return the namespaced event name.
 
@@ -139,15 +169,6 @@ Return the namespaced event name.
 
 ```js
 MyElement.event('change')  // => 'my-element:change'
-```
-
-### `dispatch(name:string, opts{ bubbles?, cancelable?, detail? }):boolean`
-
-Emit a plain string; don't namespace the event name.
-
-```js
-const el = document.querySelector('my-element')
-el.dispatch('change')  // => 'change' event
 ```
 
 ## Develop
