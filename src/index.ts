@@ -5,6 +5,13 @@ export abstract class WebComponent extends HTMLElement {
     static NAME:string = ''
     NAME:string = ''
 
+    static create (elementName:string) {
+        return class extends WebComponent {
+            static NAME = elementName
+            NAME = elementName
+        }
+    }
+
     static event (evType:string) {
         return eventName(this.NAME, evType)
     }

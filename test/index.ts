@@ -15,6 +15,17 @@ class TestComponent extends WebComponent {
 
 customElements.define('test-component', TestComponent)
 
+class AnotherElement extends WebComponent.create('another-element') {
+    constructor () {
+        super()
+        this.innerHTML = `<div>
+            hello again
+        </div>`
+    }
+}
+
+customElements.define('another-element', AnotherElement)
+
 test('can emit namespaced events', t => {
     t.plan(3)
     document.body.innerHTML += '<test-component class="test"></test-component>'
@@ -28,8 +39,16 @@ test('can emit namespaced events', t => {
     el?.emit('test', 'hello')
 })
 
+test('use facotry function', t => {
+    document.body.innerHTML += '<another-element></another-element>'
+    t.ok(document.querySelector('another-element'), 'should find the element')
+    t.equal(AnotherElement.NAME, 'another-element',
+        'should have the expected NAME property')
+})
+
 declare global {
     interface HTMLElementTagNameMap {
         'test-component': TestComponent;
+        'another-element': AnotherElement;
     }
 }

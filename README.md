@@ -6,7 +6,24 @@
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
-A base class to inherit from for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+A minimal base class to inherit from for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
+
+This adds a method, `emit` to the component, that will dispatch a namespaced
+event name, so to avoid name collisions amongst events.
+
+The short version is that it turns a plain string, `change` into a string
+like this:
+
+```
+my-element:change
+```
+
+```js
+// get an instance
+const el = document.querySelector('my-element')
+// dispatch an event
+el?.emit('hello', 'some data')  // => `my-element:hello`
+```
 
 ## install
 
@@ -28,15 +45,15 @@ const { WebComponent } = import '@substrate-system/web-component'
 const { WebCompponent } = require('@substrate-system/web-component')
 ```
 
-## example
-Extend this class. You need to define a status property `NAME`, which is used
-for event names.
+## Example
+
+Extend the class returned by the factory function, `.create`. This will make
+sure that your web component has the right property set as `.NAME`.
 
 ```js
 import { WebComponent } from '@susbtrate-system/web-component'
 
-class MyElement extends WebComponent {
-    static NAME = 'my-element'
+class MyElement extends WebComponent.create('my-element') {
     // ...
 }
 
@@ -49,9 +66,9 @@ el.emit('test', 'some data')
 // => emit an event like `my-element:test`
 ```
 
-### methods
+## methods
 
-#### `emit(name, data)`
+### `emit(name, data)`
 This will dispatch a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
 
 That way we can use event bubbling while minimizing event name collisions.
@@ -82,10 +99,18 @@ el.addEventListener(MyElement.event('test'), ev => {
 el.emit('test', 'some data')  // dispatch `my-element:test` event
 ```
 
-#### `event(name)`
+### `event(name)`
 Return the namespaced event name.
 
-##### example
+##### `event` example
 ```js
 MyElement.event('change')  // => 'my-element:change'
+```
+
+## Develop
+
+Start a localhost server:
+
+```sh
+npm start
 ```
