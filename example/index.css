@@ -5,3 +5,8 @@
     min-width: 10rem;
     min-height: 6rem;
 }
+
+my-element {
+    display: block;
+    width: fit-content;
+}
