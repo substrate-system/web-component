@@ -19,6 +19,7 @@ npm i -S @substrate-system/web-component
 ```
 
 ## tl;dr
+
 * use `.emit` to emit a namepsaced event
 * use `.dispatch` to emit a non-namespaced event
 * use `.event(name)` to get the namespaced event type

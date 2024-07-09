@@ -17,8 +17,8 @@ export abstract class WebComponent extends HTMLElement {
      * Emit a namespaced event.
      *
      * @param type event type string
-     * @param detail detail property for event
-     * @param opts `bubbles` and `cancelable`, default to true for both
+     * @param opts `bubbles`, `detail`, and `cancelable`. Default is
+     * `{ bubbles: true, cancelable: true }`
      * @returns {boolean}
      */
     emit (
