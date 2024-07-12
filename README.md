@@ -140,6 +140,8 @@ el.addEventListener(MyElement.event('test'), ev => {
 el.emit('test', 'some data')  // dispatch `my-element:test` event
 ```
 
+See also, [Custom events in Web Components](https://gomakethings.com/custom-events-in-web-components/)
+
 -------------------------------------------------------------------
 
 ### `dispatch (type, opts)`
