@@ -110,7 +110,7 @@ const { WebCompponent } = require('@substrate-system/web-component')
 
 This will emit a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
 
-The return value is the same as the native `.dispatchEvent` method,
+The return value is [the same as the native `.dispatchEvent` method](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent),
 
 > returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
 
