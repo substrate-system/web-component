@@ -20,10 +20,10 @@ npm i -S @substrate-system/web-component
 
 ## tl;dr
 
-* use `.emit` to emit a namepsaced event
-* use `.dispatch` to emit a non-namespaced event
-* use `.event(name)` to get the namespaced event type
-* extend the factory function's return value to create a web component
+* [use `.emit` to emit a namepsaced event](#emit-a-namespaced-event-from-the-instance)
+* [use `.dispatch` to emit a non-namespaced event](#emit-a-plain-string-not-namespaced-event)
+* [use `.event(name)` to get the namespaced event type](#listen-for-events)
+* [extend the factory function's return value to create a web component](#create-a-component)
 
 ## Example
 
