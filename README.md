@@ -12,6 +12,8 @@ This extends the native `HTMLElement`, adding some methods for events.
 
 [See a live demonstration](https://substrate-system.github.io/web-component/)
 
+<!-- toc -->
+
 ## install
 
 ```sh
