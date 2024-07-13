@@ -150,6 +150,8 @@ native `.dispatchEvent` method,
 
 > returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
 
+That is, it returns true if it was not `preventDetault`ed.
+
 ```ts
 dispatch (type:string, opts:Partial<{
     bubbles,

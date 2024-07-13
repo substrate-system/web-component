@@ -24,7 +24,7 @@ class MyElement extends WebComponent.create('my-element') {
         this.querySelector('button.namespaced')?.addEventListener('click', ev => {
             ev.preventDefault()
             ev.stopPropagation()
-            this.emit('click', { detail: 'some data' })
+            this.emit<string>('click', { detail: 'some data' })
         })
 
         this.querySelector('button.regular')?.addEventListener('click', ev => {
@@ -42,7 +42,7 @@ document.body.innerHTML += `
 `
 
 const el = document.querySelector('my-element')
-debug('the namespaced event....', MyElement.event('aaa'))
+debug('the namespaced event...', MyElement.event('aaa'))
 
 el?.addEventListener('my-element:click', ev => {
     debug('got a namespaced click', ev.detail)

@@ -21,16 +21,16 @@ export abstract class WebComponent extends HTMLElement {
      * `{ bubbles: true, cancelable: true }`
      * @returns {boolean}
      */
-    emit (
+    emit<T = any> (
         type:string,
         opts:Partial<{
             bubbles:boolean,
             cancelable:boolean,
-            detail:CustomEvent['detail']
+            detail:CustomEvent<T>['detail']
         }> = {}
     ):boolean {
         const namespace = this.NAME
-        const event = new CustomEvent(`${namespace}:${type}`, {
+        const event = new CustomEvent<T>(`${namespace}:${type}`, {
             bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,
             cancelable: (opts.cancelable === undefined) ? true : opts.cancelable,
             detail: opts.detail
@@ -42,10 +42,10 @@ export abstract class WebComponent extends HTMLElement {
     /**
      * Create and emit an event, no namespacing.
      */
-    dispatch (type:string, opts:Partial<{
-        bubbles,
-        cancelable,
-        detail
+    dispatch<T> (type:string, opts:Partial<{
+        bubbles:boolean,
+        cancelable:boolean,
+        detail:CustomEvent<T>['detail']
     }>):boolean {
         const event = new CustomEvent(type, {
             bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,

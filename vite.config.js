@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import postcssNesting from 'postcss-nesting'
+import cssnanoPlugin from 'cssnano'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,8 @@ export default defineConfig({
     css: {
         postcss: {
             plugins: [
-                postcssNesting
+                postcssNesting,
+                cssnanoPlugin
             ],
         },
     },
