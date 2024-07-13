@@ -13,7 +13,6 @@ declare global {
         'my-element:click': CustomEvent<string>
     }
 
-    // adds definition to Document, but you can do the same with HTMLElement
     interface HTMLElement {
         addEventListener<K extends keyof CustomEventMap>(type: K,
            listener: (this: Document, ev: CustomEventMap[K]) => void): void;
