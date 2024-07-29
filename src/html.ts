@@ -1,4 +1,4 @@
-const _data
+const _data = {}
 
 export function html (strings:string[], ...values) {
     const refs = o => {
