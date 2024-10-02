@@ -14,6 +14,27 @@ This extends the native `HTMLElement`, adding some methods for events.
 
 <!-- toc -->
 
+- [install](#install)
+- [tl;dr](#tldr)
+- [Example](#example)
+  * [Create a component](#create-a-component)
+  * [Add the component to the DOM](#add-the-component-to-the-dom)
+  * [Listen for events](#listen-for-events)
+  * [Emit a namespaced event from the instance](#emit-a-namespaced-event-from-the-instance)
+  * [Emit a plain string (not namespaced) event](#emit-a-plain-string-not-namespaced-event)
+- [API](#api)
+  * [ESM](#esm)
+  * [Common JS](#common-js)
+- [methods](#methods)
+  * [`emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`](#emitnamestring-opts-bubbles-cancelable-detail-boolean)
+  * [`dispatch (type, opts)`](#dispatch-type-opts)
+  * [`event (name:string):string`](#event-namestringstring)
+- [Develop](#develop)
+- [Test](#test)
+- [See also](#see-also)
+
+<!-- tocstop -->
+
 ## install
 
 ```sh
