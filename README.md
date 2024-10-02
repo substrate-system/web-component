@@ -221,3 +221,6 @@ npm test
 ## See also
 
 * [Custom events in Web Components](https://gomakethings.com/custom-events-in-web-components/)
+* [Web Component lifecycle methods](https://gomakethings.com/the-web-component-lifecycle-methods/)
+* [How to detect when attributes change on a Web Component](https://gomakethings.com/how-to-detect-when-attributes-change-on-a-web-component/)
+* [Handling asychronous rendering in Web Components](https://gomakethings.com/handling-asychronous-rendering-in-web-components/)
