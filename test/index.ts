@@ -5,8 +5,7 @@ class TestComponent extends WebComponent {
     static NAME = 'test-component'
     NAME = 'test-component'
 
-    constructor () {
-        super()
+    connectedCallback () {
         this.innerHTML = `<div>
             hello
         </div>`
@@ -16,15 +15,12 @@ class TestComponent extends WebComponent {
 customElements.define('test-component', TestComponent)
 
 class AnotherElement extends WebComponent.create('another-element') {
-    constructor () {
-        super()
+    connectedCallback () {
         this.innerHTML = `<div>
             hello again
         </div>`
     }
 }
-
-customElements.define('another-element', AnotherElement)
 
 test('can emit namespaced events', t => {
     t.plan(3)

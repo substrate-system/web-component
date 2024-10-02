@@ -38,13 +38,16 @@ import { WebComponent } from '@substrate-system/web-component'
 class AnotherElement extends WebComponent.create('another-element') {
     constructor () {
         super()
+    }
+
+    connectedCallback () {
         this.innerHTML = `<div>
             hello again
         </div>`
     }
 }
 
-customElements.define('another-element', AnotherElement)
+customElements.define(AnotherElement.NAME, AnotherElement)
 ```
 
 ### Add the component to the DOM
@@ -54,7 +57,7 @@ document.body.innerHTML += '<another-element></another-element>'
 
 ### Listen for events
 
-Use a helper method, `WebComponent.event(name:string)`, to get the full,
+Use a helper method, `WebComponent.event(name:string)`, to get a
 namespaced event name.
 
 ```js

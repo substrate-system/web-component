@@ -3,10 +3,14 @@ export abstract class WebComponent extends HTMLElement {
     NAME:string = ''
 
     static create (elementName:string) {
-        return class extends WebComponent {
+        const newEl = class extends WebComponent {
             static NAME = elementName
             NAME = elementName
         }
+
+        customElements.define(elementName, newEl)
+
+        return newEl
     }
 
     /**
