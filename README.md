@@ -8,7 +8,7 @@
 
 An extra minimal parent class for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
 
-This extends the native `HTMLElement`, adding some methods for events.
+This extends the native `HTMLElement`, adding some methods to help with events.
 
 [See a live demonstration](https://substrate-system.github.io/web-component/)
 
