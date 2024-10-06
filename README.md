@@ -31,6 +31,8 @@ This extends the native `HTMLElement`, adding some methods to help with events.
   * [`event (name:string):string`](#event-namestringstring)
 - [Develop](#develop)
 - [Test](#test)
+  * [`qs`](#qs)
+  * [`qsa`](#qsa)
 - [See also](#see-also)
 
 <!-- tocstop -->
