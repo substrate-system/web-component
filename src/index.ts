@@ -13,6 +13,14 @@ export abstract class WebComponent extends HTMLElement {
         return newEl
     }
 
+    qs (selector:string):HTMLElement|null {
+        return this.querySelector(selector)
+    }
+
+    qsa (selector:string):ReturnType<typeof document.querySelectorAll> {
+        return this.querySelectorAll(selector)
+    }
+
     /**
      * Take a non-namepsaced event name, return namespace event name.
      *

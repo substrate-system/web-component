@@ -218,6 +218,23 @@ npm start
 npm test
 ```
 
+-------------------------------------------------
+
+### `qs`
+A convenient shortcut to `element.querySelector`
+
+```ts
+qs (selector:string):HTMLElement|null
+```
+
+### `qsa`
+Shortcut to `element.querySelectorAll`
+
+```ts
+qsa (selector:string):ReturnType<typeof document.querySelectorAll>
+```
+
+
 ## See also
 
 * [Custom events in Web Components](https://gomakethings.com/custom-events-in-web-components/)
