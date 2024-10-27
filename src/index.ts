@@ -8,8 +8,6 @@ export abstract class WebComponent extends HTMLElement {
             NAME = elementName
         }
 
-        customElements.define(elementName, newEl)
-
         return newEl
     }
 
