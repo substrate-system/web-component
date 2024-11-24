@@ -73,3 +73,13 @@ export abstract class WebComponent extends HTMLElement {
 function eventName (namespace:string, evType:string) {
     return `${namespace}:${evType}`
 }
+
+/**
+ * Check if the given tag name has been registered.
+ *
+ * @param {string} elName The custom element tag name.
+ * @returns {boolean} True if the given name has been registered already.
+ */
+export function isRegistered (elName:string) {
+    return document.createElement(elName).constructor !== HTMLElement
+}
