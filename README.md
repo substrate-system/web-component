@@ -127,7 +127,7 @@ el?.dispatch('hello', { detail: 'some data again' })  // => `hello`
 
 This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
 
-### ESM
+### Modules
 ```js
 const { WebComponent } = import '@substrate-system/web-component'
 ```
@@ -210,23 +210,8 @@ Return the namespaced event name.
 MyElement.event('change')  // => 'my-element:change'
 ```
 
-## Develop
-Start a localhost server:
-
-```sh
-npm start
-```
-
-## Test
-
-```sh
-npm test
-```
-
--------------------------------------------------
-
 ### `qs`
-A convenient shortcut to `element.querySelector`
+A convenient shortcut to `element.querySelector`.
 
 ```ts
 qs (selector:string):HTMLElement|null
@@ -238,6 +223,54 @@ Shortcut to `element.querySelectorAll`
 ```ts
 qsa (selector:string):ReturnType<typeof document.querySelectorAll>
 ```
+
+#### example
+```js
+const myElement = document.querySelector('my-element')
+debug('the namespaced event...', MyElement.event('aaa'))
+
+// query inside the element 
+const buttons = myElement?.qsa('button')
+```
+
+---------------------------------------------------------------------
+
+## Misc
+
+### `isRegistered`
+Check if an element name has been used already.
+
+```ts
+function isRegistered (elName:string):boolean
+```
+
+#### example
+```js
+import { isRegistered } from '@substrate-system/web-component'
+
+if (!isRegistered('example-component')) {
+    customElements.define('example-component', ExampleComponent)
+}
+```
+
+---------------------------------------------------------------------
+
+## Develop
+Start a localhost server:
+
+```sh
+npm start
+```
+
+------------------------------------------------------------------------
+
+## Test
+
+```sh
+npm test
+```
+
+-------------------------------------------------
 
 
 ## See also

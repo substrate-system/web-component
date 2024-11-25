@@ -44,6 +44,9 @@ document.body.innerHTML += `
 const el = document.querySelector('my-element')
 debug('the namespaced event...', MyElement.event('aaa'))
 
+const buttons = el?.qsa('button')
+debug('the buttons', buttons)
+
 el?.addEventListener('my-element:click', ev => {
     debug('got a namespaced click', ev.detail)
     debug('the full event name: ', ev.type)
