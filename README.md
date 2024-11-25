@@ -44,7 +44,7 @@ This extends the native `HTMLElement`, adding some methods to help with events.
 
 ## install
 
-```sh
+```bash
 npm i -S @substrate-system/web-component
 ```
 
@@ -260,7 +260,7 @@ if (!isRegistered('example-component')) {
 ## Develop
 Start a localhost server:
 
-```sh
+```bash
 npm start
 ```
 
@@ -268,7 +268,7 @@ npm start
 
 ## Test
 
-```sh
+```bash
 npm test
 ```
 
