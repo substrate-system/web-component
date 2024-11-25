@@ -127,9 +127,10 @@ el?.dispatch('hello', { detail: 'some data again' })  // => `hello`
 
 ## API
 
+### Modules
+
 This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
 
-### Modules
 ```js
 const { WebComponent } = import '@substrate-system/web-component'
 ```
