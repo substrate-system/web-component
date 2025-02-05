@@ -6,7 +6,8 @@
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json#L33)
 [![install size](https://packagephobia.com/badge?p=@substrate-system/web-component)](https://packagephobia.com/result?p=@substrate-system/web-component)
 [![Common Changelog](https://nichoth.github.io/badge/common-changelog.svg)](https://common-changelog.org)
-[![license](https://img.shields.io/badge/license-Polyform_Non_commercial-26bc71)](LICENSE)
+[![license](https://img.shields.io/badge/license-Polyform_Non_Commercial-26bc71?style=flat-square)](LICENSE)
+
 
 
 An extra minimal parent class for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
