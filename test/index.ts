@@ -1,4 +1,4 @@
-import { test } from '@bicycle-codes/tapzero'
+import { test } from '@substrate-system/tapzero'
 import { WebComponent } from '../src/index.js'
 
 class TestComponent extends WebComponent {
