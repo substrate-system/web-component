@@ -6,8 +6,7 @@
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json#L33)
 [![install size](https://flat.badgen.net/packagephobia/install/@substrate-system/web-component?cache-control=no-cache)](https://packagephobia.com/result?p=@substrate-system/web-component)
 [![Common Changelog](https://nichoth.github.io/badge/common-changelog.svg)](https://common-changelog.org)
-[![license](https://img.shields.io/badge/license-Polyform_Non_Commercial-26bc71?style=flat-square)](LICENSE)
-
+[![license](https://img.shields.io/badge/license-Polyform_Small_Business-249fbc?style=flat-square)](LICENSE)
 
 
 An extra minimal parent class for [web components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components).
@@ -16,32 +15,9 @@ This extends the native `HTMLElement`, adding some methods to help with events.
 
 [See a live demonstration](https://substrate-system.github.io/web-component/)
 
+<details><summary><h2>Contents</h2></summary>
 <!-- toc -->
-
-- [install](#install)
-- [tl;dr](#tldr)
-- [Example](#example)
-  * [Create a component](#create-a-component)
-  * [Add the component to the DOM](#add-the-component-to-the-dom)
-  * [Listen for events](#listen-for-events)
-  * [Emit a namespaced event from the instance](#emit-a-namespaced-event-from-the-instance)
-  * [Emit a plain string (not namespaced) event](#emit-a-plain-string-not-namespaced-event)
-- [API](#api)
-  * [Modules](#modules)
-  * [Common JS](#common-js)
-- [methods](#methods)
-  * [`emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`](#emitnamestring-opts-bubbles-cancelable-detail-boolean)
-  * [`dispatch (type, opts)`](#dispatch-type-opts)
-  * [`event (name:string):string`](#event-namestringstring)
-  * [`qs`](#qs)
-  * [`qsa`](#qsa)
-- [Misc](#misc)
-  * [`isRegistered`](#isregistered)
-- [Develop](#develop)
-- [Test](#test)
-- [See also](#see-also)
-
-<!-- tocstop -->
+</details>
 
 ## install
 
