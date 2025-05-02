@@ -16,7 +16,34 @@ This extends the native `HTMLElement`, adding some methods to help with events.
 [See a live demonstration](https://substrate-system.github.io/web-component/)
 
 <details><summary><h2>Contents</h2></summary>
+
 <!-- toc -->
+
+- [install](#install)
+- [tl;dr](#tldr)
+- [Example](#example)
+  * [Create a component](#create-a-component)
+  * [Add the component to the DOM](#add-the-component-to-the-dom)
+  * [Listen for events](#listen-for-events)
+  * [Emit a namespaced event from the instance](#emit-a-namespaced-event-from-the-instance)
+  * [Emit a plain string (not namespaced) event](#emit-a-plain-string-not-namespaced-event)
+- [API](#api)
+  * [Modules](#modules)
+  * [Common JS](#common-js)
+- [methods](#methods)
+  * [`emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`](#emitnamestring-opts-bubbles-cancelable-detail-boolean)
+  * [`dispatch (type, opts)`](#dispatch-type-opts)
+  * [`event (name:string):string`](#event-namestringstring)
+  * [`qs`](#qs)
+  * [`qsa`](#qsa)
+- [Misc](#misc)
+  * [`isRegistered`](#isregistered)
+- [Develop](#develop)
+- [Test](#test)
+- [See also](#see-also)
+
+<!-- tocstop -->
+
 </details>
 
 ## install
