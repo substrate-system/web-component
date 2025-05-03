@@ -82,7 +82,9 @@ class AnotherElement extends WebComponent.create('another-element') {
 customElements.define(AnotherElement.NAME, AnotherElement)
 ```
 
-The new component will have a property `NAME` on the class that is equal to [the name you passed in](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#valid_custom_element_names). The component name should be [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+The new component will have a property `NAME` on the class that is equal to
+[the name you passed in](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#valid_custom_element_names).
+The component name should be [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
 
 ### Add the component to the DOM
 ```js
@@ -148,15 +150,19 @@ const { WebCompponent } = require('@substrate-system/web-component')
 
 ### `emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`
 
-This will emit a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events), namespaced according to a convention.
+This will emit a [CustomEvent](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events),
+namespaced according to a convention.
 
-The return value is [the same as the native `.dispatchEvent` method](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent),
+The return value is
+[the same as the native `.dispatchEvent` method](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent),
 
 > returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
 
-Because the event is namespaced, we can use event bubbling while minimizing event name collisions.
+Because the event is namespaced, we can use event bubbling while minimizing
+event name collisions.
 
-The naming convention is to take the `NAME` property of the class, and append a string `:event-name`.
+The naming convention is to take the `NAME` property of the class, and append a
+string `:event-name`.
 
 So `emit('test')` dispatches an event like `my-element:test`.
 
@@ -188,7 +194,8 @@ See also, [Custom events in Web Components](https://gomakethings.com/custom-even
 Create and emit an event, no namespacing. The return value is the same as the
 native `.dispatchEvent` method,
 
-> returns `true` if either event's `cancelable` attribute value is false or its `preventDefault()` method was not invoked, and `false` otherwise.
+> returns `true` if either event's `cancelable` attribute value is false or
+its `preventDefault()` method was not invoked, and `false` otherwise.
 
 That is, it returns true if it was not `preventDetault`ed.
 
