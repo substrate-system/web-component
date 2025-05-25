@@ -31,10 +31,10 @@
     "postversion": "git push --follow-tags && npm publish",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
   "devDependencies": {
     "@bicycle-codes/debug": "^0.7.2",
     "@bicycle-codes/dom": "^0.1.2",
+    "@substrate-system/dom": "^0.1.7",
     "@substrate-system/tapzero": "^0.10.13",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",

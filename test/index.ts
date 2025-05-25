@@ -1,4 +1,5 @@
 import { test } from '@substrate-system/tapzero'
+import { waitFor, waitForText } from '@substrate-system/dom'
 import { WebComponent } from '../src/index.js'
 
 class TestComponent extends WebComponent {
@@ -14,6 +15,7 @@ class TestComponent extends WebComponent {
 
 customElements.define('test-component', TestComponent)
 
+// use factory function
 class AnotherElement extends WebComponent.create('another-element') {
     connectedCallback () {
         this.innerHTML = `<div>
@@ -21,6 +23,8 @@ class AnotherElement extends WebComponent.create('another-element') {
         </div>`
     }
 }
+
+AnotherElement.define()
 
 test('can emit namespaced events', t => {
     t.plan(3)
@@ -48,11 +52,18 @@ test('emit an event without namespacing', t => {
     el?.dispatch('hello', { detail: 'example data' })
 })
 
-test('use factory function', t => {
+test('use factory function', async t => {
     document.body.innerHTML += '<another-element></another-element>'
-    t.ok(document.querySelector('another-element'), 'should find the element')
+    t.ok(await waitForText('hello again'), 'should find the element')
     t.equal(AnotherElement.NAME, 'another-element',
         'should have the expected NAME property')
+})
+
+test('NAME static property', async t => {
+    const el = await waitFor(AnotherElement.NAME)
+    t.ok(el, 'should find the element')
+    t.equal(el?.tagName.toLocaleLowerCase(), AnotherElement.NAME,
+        'should have the NAME static property')
 })
 
 declare global {

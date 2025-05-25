@@ -3,12 +3,16 @@ export abstract class WebComponent extends HTMLElement {
     NAME:string = ''
 
     static create (elementName:string) {
-        const newEl = class extends WebComponent {
+        return class extends WebComponent {
             static NAME = elementName
             NAME = elementName
         }
+    }
 
-        return newEl
+    static define<T extends { new (...args:any[]):WebComponent; NAME:string }>(this:T) {
+        if (!isRegistered(this.NAME)) {
+            window.customElements.define(this.NAME, this)
+        }
     }
 
     qs (selector:string):HTMLElement|null {

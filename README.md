@@ -69,10 +69,6 @@ Use the factory function to create a new web component.
 import { WebComponent } from '@substrate-system/web-component'
 
 class AnotherElement extends WebComponent.create('another-element') {
-    constructor () {
-        super()
-    }
-
     connectedCallback () {
         this.innerHTML = `<div>
             hello again
@@ -80,17 +76,20 @@ class AnotherElement extends WebComponent.create('another-element') {
     }
 }
 
-customElements.define(AnotherElement.NAME, AnotherElement)
+// call custom customElements.define with the right tag name
+AnotherElement.define()
 ```
 
 The new component will have a property `NAME` on the class that is equal to
 [the name you passed in](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#valid_custom_element_names).
 The component name should be [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
 
+
 ### Add the component to the DOM
 ```js
 document.body.innerHTML += '<another-element></another-element>'
 ```
+
 
 ### Listen for events
 
@@ -132,9 +131,9 @@ const el = document.querySelector('my-element')
 el?.dispatch('hello', { detail: 'some data again' })  // => `hello`
 ```
 
-## API
+## Modules
 
-### Modules
+### ESM
 
 This exposes ESM and common JS via [package.json `exports` field](https://nodejs.org/api/packages.html#exports).
 

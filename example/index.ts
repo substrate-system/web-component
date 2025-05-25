@@ -10,17 +10,15 @@ declare global {
     }
 }
 
+// use the factory function
 class MyElement extends WebComponent.create('my-element') {
-    constructor () {
-        super()
+    connectedCallback () {
         this.innerHTML = `<div class="example">
-            <p>example element</p>
+            <p>hello example element</p>
             <button class="namespaced">emit a namespaced event</button>
             <button class="regular">emit a regular event</button>
         </div>`
-    }
 
-    connectedCallback () {
         this.querySelector('button.namespaced')?.addEventListener('click', ev => {
             ev.preventDefault()
             ev.stopPropagation()
