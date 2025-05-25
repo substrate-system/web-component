@@ -4,7 +4,7 @@
 [![module](https://img.shields.io/badge/module-ESM%2FCJS-blue?style=flat-square)](README.md)
 [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-blue?logo=semver&style=flat-square)](https://semver.org/)
 [![dependencies](https://img.shields.io/badge/dependencies-zero-brightgreen.svg?style=flat-square)](package.json#L33)
-[![GZip size](https://img.shields.io/bundlephobia/minzip/@substrate-system/web-component?style=flat-square&color=green)](https://bundlephobia.com/package/@substrate-system/web-component)
+[![GZip size](https://flat.badgen.net/bundlephobia/minzip/@substrate-system/web-component?color=green)](https://bundlephobia.com/package/@substrate-system/web-component)
 [![install size](https://flat.badgen.net/packagephobia/install/@substrate-system/web-component?cache-control=no-cache)](https://packagephobia.com/result?p=@substrate-system/web-component)
 [![Common Changelog](https://nichoth.github.io/badge/common-changelog.svg)](https://common-changelog.org)
 [![license](https://img.shields.io/badge/license-Polyform_Small_Business-249fbc?style=flat-square)](LICENSE)
