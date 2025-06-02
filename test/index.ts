@@ -81,8 +81,8 @@ test('Attribute change events', async t => {
 
     el?.setAttribute('disabled', '')
     const btn = el?.querySelector('button')
-    t.equal(btn?.getAttribute('disabled'), '',
-        'should handle attribute change with a conventionally name method')
+    t.equal(btn?.hasAttribute('disabled'), true,
+        'should handle attribute change with a conventionally named method')
 })
 
 declare global {
