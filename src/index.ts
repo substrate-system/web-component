@@ -47,7 +47,9 @@ export abstract class WebComponent extends HTMLElement {
         return this.querySelector(selector)
     }
 
-    qsa (selector:string):ReturnType<typeof document.querySelectorAll> {
+    qsa<K extends keyof HTMLElementTagNameMap>(selector:K):HTMLElementTagNameMap[K]|null;
+    qsa<E extends Element = Element>(selector:string):E|null;
+    qsa (selector:string):NodeListOf<Element> {
         return this.querySelectorAll(selector)
     }
 
