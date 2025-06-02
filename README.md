@@ -293,3 +293,5 @@ npm test
 * [Web Component lifecycle methods](https://gomakethings.com/the-web-component-lifecycle-methods/)
 * [How to detect when attributes change on a Web Component](https://gomakethings.com/how-to-detect-when-attributes-change-on-a-web-component/)
 * [Handling asychronous rendering in Web Components](https://gomakethings.com/handling-asychronous-rendering-in-web-components/)
+* [Accessible Icon Buttons](https://www.sarasoueidan.com/blog/accessible-icon-buttons/)
+* [Inclusively Hidden](https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html)
