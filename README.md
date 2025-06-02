@@ -38,6 +38,8 @@ This extends the native `HTMLElement`, adding some methods to help with events.
   * [`qs`](#qs)
   * [`qsa`](#qsa)
 - [Misc](#misc)
+  * [qs](#qs)
+  * [qsa](#qsa)
   * [`isRegistered`](#isregistered)
 - [Develop](#develop)
 - [Test](#test)
