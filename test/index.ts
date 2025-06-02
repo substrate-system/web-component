@@ -6,7 +6,9 @@ class TestComponent extends WebComponent {
     static NAME = 'test-component'
     NAME = 'test-component'
 
-    connectedCallback () {
+    static observedAttributes = []
+
+    render () {
         this.innerHTML = `<div>
             hello
         </div>`
@@ -17,9 +19,17 @@ customElements.define('test-component', TestComponent)
 
 // use factory function
 class AnotherElement extends WebComponent.create('another-element') {
-    connectedCallback () {
+    static observedAttributes = ['disabled']
+
+    handleChange_disabled (oldValue, newValue) {
+        this.qs('button')?.setAttribute('disabled', newValue)
+    }
+
+    render () {
         this.innerHTML = `<div>
             hello again
+
+            <button>hello</button>
         </div>`
     }
 }
@@ -64,6 +74,15 @@ test('NAME static property', async t => {
     t.ok(el, 'should find the element')
     t.equal(el?.tagName.toLocaleLowerCase(), AnotherElement.NAME,
         'should have the NAME static property')
+})
+
+test('Attribute change events', async t => {
+    const el = await waitFor(AnotherElement.NAME)
+
+    el?.setAttribute('disabled', '')
+    const btn = el?.querySelector('button')
+    t.equal(btn?.getAttribute('disabled'), '',
+        'should handle attribute change with a conventionally name method')
 })
 
 declare global {

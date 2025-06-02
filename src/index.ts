@@ -6,6 +6,7 @@ export abstract class WebComponent extends HTMLElement {
         return class extends WebComponent {
             static NAME = elementName
             NAME = elementName
+            render () {}
         }
     }
 
@@ -14,6 +15,31 @@ export abstract class WebComponent extends HTMLElement {
             window.customElements.define(this.NAME, this)
         }
     }
+
+    /**
+     * Runs when the value of an attribute is changed.
+     *
+     * Depends on `static observedAttributes`.
+     *
+     * Should name methods like `handleChange_disabled`.
+     *
+     * @param  {string} name     The attribute name
+     * @param  {string} oldValue The old attribute value
+     * @param  {string} newValue The new attribute value
+     */
+    async attributeChangedCallback (name:string, oldValue:string, newValue:string) {
+        const handler = this[`handleChange_${name}`]
+        if (handler) {
+            await handler.call(this, oldValue, newValue)
+        }
+        this.render()
+    }
+
+    connectedCallback () {
+        this.render()
+    }
+
+    abstract render ():any
 
     qs (selector:string):HTMLElement|null {
         return this.querySelector(selector)
