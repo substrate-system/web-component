@@ -37,7 +37,6 @@ if ('customElements' in window) {
     MyElement.define()
 }
 
-
 document.body.innerHTML += `
     <my-element></my-element>
 `
