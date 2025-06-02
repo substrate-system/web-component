@@ -41,7 +41,9 @@ export abstract class WebComponent extends HTMLElement {
 
     abstract render ():any
 
-    qs (selector:string):HTMLElement|null {
+    qs<K extends keyof HTMLElementTagNameMap>(selector:K):HTMLElementTagNameMap[K]|null;
+    qs<E extends Element = Element>(selector:string):E|null;
+    qs (selector:string):Element|null {
         return this.querySelector(selector)
     }
 
