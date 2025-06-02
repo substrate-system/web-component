@@ -88,3 +88,6 @@ function eventName (namespace:string, evType:string) {
 export function isRegistered (elName:string):boolean {
     return document.createElement(elName).constructor !== HTMLElement
 }
+
+export const qs = document.querySelector.bind(document)
+export const qsa = document.querySelectorAll.bind(document)

@@ -251,6 +251,20 @@ const buttons = myElement?.qsa('button')
 
 ## Misc
 
+### qs
+Expose `document.querySelector` in a convenient way.
+
+```js
+import { qs } from '@substrate-system/web-component'
+```
+
+### qsa
+A shortcut to `document.querySelectorAll`.
+
+```js
+import { qsa } from '@substrate-system/web-component'
+```
+
 ### `isRegistered`
 Check if an element name has been used already.
 
