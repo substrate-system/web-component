@@ -33,7 +33,10 @@ class MyElement extends WebComponent.create('my-element') {
     }
 }
 
-customElements.define('my-element', MyElement)
+if ('customElements' in window) {
+    MyElement.define()
+}
+
 
 document.body.innerHTML += `
     <my-element></my-element>
