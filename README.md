@@ -84,7 +84,7 @@ AnotherElement.define()
 
 The new component will have a property `NAME` on the class that is equal to
 [the name you passed in](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#valid_custom_element_names).
-The component name should be [kebab case](https://developer.mozilla.org/en-US/docs/Glossary/Kebab_case).
+The [component name should be kebab case](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#name).
 
 
 ### Add the component to the DOM
