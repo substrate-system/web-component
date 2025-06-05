@@ -37,6 +37,7 @@ This extends the native `HTMLElement`, adding some methods to help with events.
   * [`event (name:string):string`](#event-namestringstring)
   * [`qs`](#qs)
   * [`qsa`](#qsa)
+  * [element.qs & element.qsa](#elementqs--elementqsa)
 - [Misc](#misc)
   * [qs](#qs)
   * [qsa](#qsa)
