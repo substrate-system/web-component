@@ -226,6 +226,7 @@ Return the namespaced event name.
 MyElement.event('change')  // => 'my-element:change'
 ```
 
+
 ### `qs`
 A convenient shortcut to `element.querySelector`.
 
@@ -233,14 +234,21 @@ A convenient shortcut to `element.querySelector`.
 qs (selector:string):HTMLElement|null
 ```
 
+
+
 ### `qsa`
-Shortcut to `element.querySelectorAll`
+Shortcut to `document.querySelectorAll`
 
 ```ts
 qsa (selector:string):ReturnType<typeof document.querySelectorAll>
 ```
 
+### element.qs & element.qsa
+
+A shortcut to `element.querySelector` & `element.querySelectorAll`.
+
 #### example
+
 ```js
 const myElement = document.querySelector('my-element')
 debug('the namespaced event...', MyElement.event('aaa'))
@@ -254,17 +262,17 @@ const buttons = myElement?.qsa('button')
 ## Misc
 
 ### qs
-Expose `document.querySelector` in a convenient way.
+A convenient shortcut to `document.querySelector`.
 
 ```js
-import { qs } from '@substrate-system/web-component'
+import { qs } from 'substrate-system/web-component/qs'
 ```
 
 ### qsa
 A shortcut to `document.querySelectorAll`.
 
 ```js
-import { qsa } from '@substrate-system/web-component'
+import { qsa } from 'substrate-system/web-component/qsa'
 ```
 
 ### `isRegistered`

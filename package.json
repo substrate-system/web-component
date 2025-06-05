@@ -12,6 +12,34 @@
     "example": "example",
     "test": "test"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./qs": {
+      "import": "./dist/qs.js",
+      "require": "./dist/qs.cjs"
+    },
+    "./qsa": {
+      "import": "./dist/qsa.js",
+      "require": "./dist/qsa.cjs"
+    },
+    "./*/min": {
+      "import": "./dist/*.min.js",
+      "require": "./dist/*.min.cjs"
+    },
+    "./*": {
+      "import": [
+        "./dist/*.js",
+        "./dist/*"
+      ],
+      "require": [
+        "./dist/*.cjs",
+        "./dist/*"
+      ]
+    }
+  },
   "scripts": {
     "lint": "eslint \"./**/*.{ts,js}\"",
     "build-tests": "esbuild test/index.ts --target=es2020 --bundle --keep-names > test/test-bundle.js",
@@ -50,22 +78,6 @@
     "typedoc": "^0.28.1",
     "typescript": "^5.8.3",
     "vite": "^6.0.11"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./*": {
-      "import": [
-        "./dist/*.js",
-        "./dist/*"
-      ],
-      "require": [
-        "./dist/*.cjs",
-        "./dist/*"
-      ]
-    }
   },
   "author": "nichoth <nichoth@nichoth.com> (https://nichoth.com)",
   "license": "SEE LICENSE IN LICENSE",
