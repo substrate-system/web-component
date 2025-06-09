@@ -124,6 +124,20 @@ const el = document.querySelector('my-element')
 el?.emit('hello', { detail: 'some data' })  // => `my-element:hello`
 ```
 
+### Listen for a namespaced event
+
+Use the static method `.event` to get a namespaced event name.
+
+```js
+class ExampleComponent extends WebComponent {
+    tag = 'example-component'
+    // ...
+}
+
+const ev = ExampleComponent.event('click')
+// => 'example-component:click'
+```
+
 ### Emit a plain string (not namespaced) event
 Don't namespace the event name, just emit the literal string.
 
