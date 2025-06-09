@@ -1,4 +1,4 @@
-export abstract class WebComponent extends HTMLElement {
+export abstract class WebComponent extends window.HTMLElement {
     static NAME:string = ''
     NAME:string = ''
 
@@ -116,5 +116,5 @@ function eventName (namespace:string, evType:string) {
  * @returns {boolean} True if the given name has been registered already.
  */
 export function isRegistered (elName:string):boolean {
-    return document.createElement(elName).constructor !== HTMLElement
+    return document.createElement(elName).constructor !== window.HTMLElement
 }
