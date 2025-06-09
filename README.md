@@ -27,6 +27,7 @@ This extends the native `HTMLElement`, adding some methods to help with events.
   * [Add the component to the DOM](#add-the-component-to-the-dom)
   * [Listen for events](#listen-for-events)
   * [Emit a namespaced event from the instance](#emit-a-namespaced-event-from-the-instance)
+  * [Listen for a namespaced event](#listen-for-a-namespaced-event)
   * [Emit a plain string (not namespaced) event](#emit-a-plain-string-not-namespaced-event)
 - [Modules](#modules)
   * [ESM](#esm)
