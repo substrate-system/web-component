@@ -11,6 +11,7 @@ export abstract class WebComponent extends window.HTMLElement {
     }
 
     static define<T extends { new (...args:any[]):WebComponent; NAME:string }>(this:T) {
+        if (!window) return
         if (!('customElements' in window)) return
 
         if (!isRegistered(this.NAME)) {
