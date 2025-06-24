@@ -11,12 +11,7 @@ export abstract class WebComponent extends window.HTMLElement {
     }
 
     static define<T extends { new (...args:any[]):WebComponent; NAME:string }>(this:T) {
-        if (!window) return
-        if (!('customElements' in window)) return
-
-        if (!isRegistered(this.NAME)) {
-            window.customElements.define(this.NAME, this)
-        }
+        define(this.NAME, this)
     }
 
     /**
@@ -120,4 +115,13 @@ function eventName (namespace:string, evType:string) {
  */
 export function isRegistered (elName:string):boolean {
     return document.createElement(elName).constructor !== window.HTMLElement
+}
+
+export function define (name:string, element:CustomElementConstructor) {
+    if (!window) return
+    if (!('customElements' in window)) return
+
+    if (!isRegistered(name)) {
+        window.customElements.define(name, element)
+    }
 }
