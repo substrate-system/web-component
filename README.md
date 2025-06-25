@@ -317,7 +317,7 @@ if (!isRegistered('example-component')) {
 
 Add a component to the [custom element registry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry).
 
-This uses `isRegistered` so it will not throw if the name has been
+This uses `isRegistered`, so it will not throw if the name has been
 taken already.
 
 ```js
