@@ -25,6 +25,10 @@
       "import": "./dist/qsa.js",
       "require": "./dist/qsa.cjs"
     },
+    "./util": {
+      "import": "./dist/util.js",
+      "require": "./dist/util.cjs"
+    },
     "./*/min": {
       "import": "./dist/*.min.js",
       "require": "./dist/*.min.cjs"
