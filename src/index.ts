@@ -1,17 +1,17 @@
 export abstract class WebComponent extends window.HTMLElement {
-    static NAME:string = ''
-    NAME:string = ''
+    static TAG:string = ''
+    TAG:string = ''
 
     static create (elementName:string) {
         return class extends WebComponent {
-            static NAME = elementName
-            NAME = elementName
+            static TAG = elementName
+            TAG = elementName
             render () {}
         }
     }
 
-    static define<T extends { new (...args:any[]):WebComponent; NAME:string }>(this:T) {
-        define(this.NAME, this)
+    static define<T extends { new (...args:any[]):WebComponent; TAG:string }>(this:T) {
+        define(this.TAG, this)
     }
 
     /**
@@ -58,7 +58,7 @@ export abstract class WebComponent extends window.HTMLElement {
      * @returns {string} Namespaced event name, eg, `my-component:click`
      */
     static event (evType:string):string {
-        return eventName(this.NAME, evType)
+        return eventName(this.TAG, evType)
     }
 
     /**
@@ -74,7 +74,7 @@ export abstract class WebComponent extends window.HTMLElement {
         cancelable:boolean,
         detail:CustomEvent<T>['detail']
     }> = {}):boolean {
-        const namespace = this.NAME
+        const namespace = this.TAG
         const event = new CustomEvent<T>(`${namespace}:${type}`, {
             bubbles: (opts.bubbles === undefined) ? true : opts.bubbles,
             cancelable: (opts.cancelable === undefined) ? true : opts.cancelable,
