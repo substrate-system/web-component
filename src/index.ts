@@ -30,7 +30,6 @@ export abstract class WebComponent extends window.HTMLElement {
         if (handler) {
             await handler.call(this, oldValue, newValue)
         }
-        this.render()
     }
 
     connectedCallback () {
