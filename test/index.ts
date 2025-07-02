@@ -3,8 +3,8 @@ import { waitFor, waitForText } from '@substrate-system/dom'
 import { WebComponent } from '../src/index.js'
 
 class TestComponent extends WebComponent {
-    static NAME = 'test-component'
-    NAME = 'test-component'
+    static TAG = 'test-component'
+    TAG = 'test-component'
 
     static observedAttributes = []
 
@@ -65,19 +65,19 @@ test('emit an event without namespacing', t => {
 test('use factory function', async t => {
     document.body.innerHTML += '<another-element></another-element>'
     t.ok(await waitForText('hello again'), 'should find the element')
-    t.equal(AnotherElement.NAME, 'another-element',
-        'should have the expected NAME property')
+    t.equal(AnotherElement.TAG, 'another-element',
+        'should have the expected TAG property')
 })
 
-test('NAME static property', async t => {
-    const el = await waitFor(AnotherElement.NAME)
+test('TAG static property', async t => {
+    const el = await waitFor(AnotherElement.TAG)
     t.ok(el, 'should find the element')
-    t.equal(el?.tagName.toLocaleLowerCase(), AnotherElement.NAME,
-        'should have the NAME static property')
+    t.equal(el?.tagName.toLocaleLowerCase(), AnotherElement.TAG,
+        'should have the TAG static property')
 })
 
 test('Attribute change events', async t => {
-    const el = await waitFor(AnotherElement.NAME)
+    const el = await waitFor(AnotherElement.TAG)
 
     el?.setAttribute('disabled', '')
     const btn = el?.querySelector('button')
