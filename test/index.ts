@@ -1,5 +1,6 @@
 import { test } from '@substrate-system/tapzero'
 import { waitFor, waitForText } from '@substrate-system/dom'
+import { toAttributes } from '../src/util.js'
 import { WebComponent } from '../src/index.js'
 
 class TestComponent extends WebComponent {
@@ -50,6 +51,11 @@ test('can emit namespaced events', t => {
         t.ok(ev, 'should get the custom event')
         t.equal(ev.detail, 'hello', 'should emit the event detail')
     }
+})
+
+test('to attributes', t => {
+    const attrs = toAttributes({ hello: 'world', disabled: true })
+    t.equal(attrs, 'hello="world" disabled')
 })
 
 test('emit an event without namespacing', t => {
