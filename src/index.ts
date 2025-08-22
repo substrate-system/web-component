@@ -2,7 +2,10 @@ export abstract class WebComponent extends window.HTMLElement {
     static TAG:string = ''
     TAG:string = ''
 
-    static create (elementName:string) {
+    static create (elementName:string):{
+        new (...args:any[]):WebComponent;
+        TAG:string;
+    } {
         return class extends WebComponent {
             static TAG = elementName
             TAG = elementName
