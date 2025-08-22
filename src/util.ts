@@ -21,6 +21,8 @@ export function define (name:string, element:CustomElementConstructor) {
 export const qs = document.querySelector.bind(document)
 export const qsa = document.querySelectorAll.bind(document)
 
+export type Attrs = Record<string, undefined|null|string|number|boolean|(string|number)[]>
+
 /**
  * Transform an object into an HTML attributes string. The object should be
  * like `{ attributeName: value }`.
@@ -28,9 +30,7 @@ export const qsa = document.querySelectorAll.bind(document)
  * @param attrs An object for the attributes.
  * @returns {string} A string suitable for use as HTML attributes.
  */
-export function toAttributes (
-    attrs:Record<string, undefined|null|string|number|boolean|(string|number)[]>
-):string {
+export function toAttributes (attrs:Attrs):string {
     return Object.keys(attrs).reduce((acc, k) => {
         const value = attrs[k]
         if (!value) return acc
