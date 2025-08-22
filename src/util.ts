@@ -1,3 +1,5 @@
+export { toAttributes } from './attributes.js'
+
 /**
  * Check if the given tag name has been registered.
  *
