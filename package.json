@@ -29,6 +29,10 @@
       "import": "./dist/util.js",
       "require": "./dist/util.cjs"
     },
+    "./attributes": {
+      "import": "./dist/attributes.js",
+      "require": "./dist/attributes.cjs"
+    },
     "./*/min": {
       "import": "./dist/*.min.js",
       "require": "./dist/*.min.cjs"
