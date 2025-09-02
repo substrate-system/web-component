@@ -33,6 +33,10 @@
       "import": "./dist/attributes.js",
       "require": "./dist/attributes.cjs"
     },
+    "./html": {
+      "import": "./dist/html.js",
+      "require": "./dist/html.cjs"
+    },
     "./*/min": {
       "import": "./dist/*.min.js",
       "require": "./dist/*.min.cjs"

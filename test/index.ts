@@ -3,6 +3,9 @@ import { waitFor, waitForText } from '@substrate-system/dom'
 import { toAttributes } from '../src/util.js'
 import { WebComponent } from '../src/index.js'
 
+// Import HTML rendering tests
+import './html.test.js'
+
 class TestComponent extends WebComponent {
     static TAG = 'test-component'
     TAG = 'test-component'

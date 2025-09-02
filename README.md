@@ -158,6 +158,20 @@ This exposes ESM and common JS via [package.json `exports` field](https://nodejs
 const { WebComponent } = import '@substrate-system/web-component'
 ```
 
+### Server-side HTML rendering
+
+For server-side rendering in Node.js environments:
+
+```js
+import { render } from '@substrate-system/web-component/html'
+
+// Render a web component as an HTML string
+const html = render(MyComponent, { class: 'example' }, 'content')
+// Output: <my-component class="example">content</my-component>
+```
+
+See [RENDER-EXAMPLE.md](./RENDER-EXAMPLE.md) for detailed usage examples.
+
 ### Common JS
 ```js
 const { WebCompponent } = require('@substrate-system/web-component')
@@ -328,6 +342,25 @@ import { define } from '@substrate-system/web-component/util'
 ```ts
 function define (name:string, element:CustomElementConstructor) {
 ```
+
+### `/html`
+
+Server-side HTML rendering functions.
+
+```js
+import { render } from '@substrate-system/web-component/html'
+```
+
+#### `render(component, attrs?, children?)`
+Renders a web component as an HTML string.
+
+#### `renderComponents(components)`
+Renders multiple components.
+
+#### `wrapInContainer(content, containerTag?, containerAttrs?)`
+Wraps rendered content in a container element.
+
+See [RENDER-EXAMPLE.md](./RENDER-EXAMPLE.md) for detailed examples.
 
 
 ---------------------------------------------------------------------
