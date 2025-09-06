@@ -5,15 +5,30 @@ export abstract class WebComponent extends window.HTMLElement {
     static create (elementName:string):{
         new (...args:any[]):WebComponent;
         TAG:string;
+        define: typeof WebComponent.define;
+        event: typeof WebComponent.event;
     } {
-        return class extends WebComponent {
+        const CreatedClass = class extends WebComponent {
             static TAG = elementName
             TAG = elementName
             render () {}
         }
+
+        // Copy static methods with proper binding
+        CreatedClass.define = function () {
+            return WebComponent.define.call(this)
+        }
+        CreatedClass.event = function (evType:string) {
+            return WebComponent.event.call(this, evType)
+        }
+
+        return CreatedClass
     }
 
-    static define<T extends { new (...args:any[]):WebComponent; TAG:string }>(this:T) {
+    static define<T extends {
+        new (...args:any[]):WebComponent;
+        TAG:string;
+    }>(this:T) {
         define(this.TAG, this)
     }
 
@@ -41,13 +56,19 @@ export abstract class WebComponent extends window.HTMLElement {
 
     abstract render ():any
 
-    qs<K extends keyof HTMLElementTagNameMap>(selector:K):HTMLElementTagNameMap[K]|null;
+    qs<K extends keyof HTMLElementTagNameMap>(
+        selector:K
+    ):HTMLElementTagNameMap[K]|null;
+
     qs<E extends Element = Element>(selector:string):E|null;
     qs (selector:string):Element|null {
         return this.querySelector(selector)
     }
 
-    qsa<K extends keyof HTMLElementTagNameMap>(selector:K):HTMLElementTagNameMap[K]|null;
+    qsa<K extends keyof HTMLElementTagNameMap>(
+        selector:K
+    ):HTMLElementTagNameMap[K]|null;
+
     qsa<E extends Element = Element>(selector:string):E|null;
     qsa (selector:string):NodeListOf<Element> {
         return this.querySelectorAll(selector)

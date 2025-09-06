@@ -22,7 +22,11 @@ customElements.define('test-component', TestComponent)
 class AnotherElement extends WebComponent.create('another-element') {
     static observedAttributes = ['disabled']
 
-    handleChange_disabled (oldValue, newValue) {
+    connectedCallback () {
+        this.render()
+    }
+
+    handleChange_disabled (_oldValue, newValue) {
         this.qs('button')?.setAttribute('disabled', newValue)
     }
 
@@ -69,13 +73,23 @@ test('emit an event without namespacing', t => {
 })
 
 test('use factory function', async t => {
+    t.plan(2)
     document.body.innerHTML += '<another-element></another-element>'
-    t.ok(await waitForText('hello again'), 'should find the element')
+
+    // Wait for the element to be defined and rendered
+    await waitFor('another-element')
+
+    t.ok(await waitForText({
+        text: 'hello again',
+        timeout: 3000
+    }), 'should find the element')
+
     t.equal(AnotherElement.TAG, 'another-element',
         'should have the expected TAG property')
 })
 
 test('TAG static property', async t => {
+    t.plan(2)
     const el = await waitFor(AnotherElement.TAG)
     t.ok(el, 'should find the element')
     t.equal(el?.tagName.toLocaleLowerCase(), AnotherElement.TAG,
@@ -83,12 +97,18 @@ test('TAG static property', async t => {
 })
 
 test('Attribute change events', async t => {
+    t.plan(1)
     const el = await waitFor(AnotherElement.TAG)
 
     el?.setAttribute('disabled', '')
     const btn = el?.querySelector('button')
     t.equal(btn?.hasAttribute('disabled'), true,
         'should handle attribute change with a conventionally named method')
+})
+
+test('all done', () => {
+    // @ts-expect-error explicitly end
+    window.testsFinished = true
 })
 
 declare global {
