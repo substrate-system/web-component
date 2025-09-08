@@ -23,12 +23,18 @@ This extends the native `HTMLElement`, and adds
 
 - [install](#install)
 - [tl;dr](#tldr)
-- [Example](#example)
+- [Examples](#examples)
   * [Create a component](#create-a-component)
   * [Add the component to the DOM](#add-the-component-to-the-dom)
   * [Listen for events](#listen-for-events)
+  * [Wildcard Event Listeners](#wildcard-event-listeners)
+    + [Namespaced wildcard: `Component.event('*')`](#namespaced-wildcard-componentevent)
+    + [Global wildcard: `'*'`](#global-wildcard-)
+  * [Hide undefined elements](#hide-undefined-elements)
   * [Emit a namespaced event from the instance](#emit-a-namespaced-event-from-the-instance)
   * [Listen for a namespaced event](#listen-for-a-namespaced-event)
+  * [Listen for all namespaced events from a component](#listen-for-all-namespaced-events-from-a-component)
+  * [Listen for all events (global wildcard)](#listen-for-all-events-global-wildcard)
   * [Emit a plain string (not namespaced) event](#emit-a-plain-string-not-namespaced-event)
 - [Modules](#modules)
   * [ESM](#esm)
@@ -36,12 +42,19 @@ This extends the native `HTMLElement`, and adds
 - [methods](#methods)
   * [`emit(name:string, opts:{ bubbles?, cancelable?, detail? }):boolean`](#emitnamestring-opts-bubbles-cancelable-detail-boolean)
   * [`dispatch (type, opts)`](#dispatch-type-opts)
+    + [`dispatch` example](#dispatch-example)
   * [`event (name:string):string`](#event-namestringstring)
+    + [`event` example](#event-example)
   * [`qs`](#qs)
   * [`qsa`](#qsa)
   * [element.qs & element.qsa](#elementqs--elementqsa)
+    + [example](#example)
 - [Misc](#misc)
   * [`/util`](#util)
+    + [`qs`](#qs-1)
+    + [`qsa`](#qsa-1)
+    + [`isRegistered(name:string)`](#isregisterednamestring)
+    + [`define(name:string, element:CustomElementConstructor)`](#definenamestring-elementcustomelementconstructor)
 - [Develop](#develop)
 - [Test](#test)
 - [See also](#see-also)
@@ -62,29 +75,9 @@ npm i -S @substrate-system/web-component
 * [use `.dispatch` to emit a non-namespaced event](#emit-a-plain-string-not-namespaced-event)
 * [use `.event(name)` to get the namespaced event type](#listen-for-events)
 * [extend the factory function to create a web component](#create-a-component)
+* [Listen for all event with the `'*'` event name](#wildcard-event-listeners).
 
 ## Examples
-
-### Hide undefined elements
-
->
-> [!TIP]
-> Use the CSS [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined)
-> pseudo-class to hide elements until they have been defined in JS, to prevent
-> a [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/#awaiting-customelements.whendefined).
->
-
-```css
-my-element:not(:defined) {
-  visibility: hidden;
-}
-```
-
->
-> [!CAUTION]
-> JS must exist on the device for the custom elements to be defined.
-> A better option might be to [set a single class when everything is defined](https://www.abeautifulsite.net/posts/revisiting-fouce).
->
 
 ### Create a component
 Use the factory function to create a new web component.
@@ -135,6 +128,81 @@ el?.addEventListener('hello', ev => {
 })
 ```
 
+### Wildcard Event Listeners
+
+The component supports two types of wildcard event listeners.
+
+#### Namespaced wildcard: `Component.event('*')`
+
+Listen to all events emitted through the component's `.emit()` method
+(events in the component's namespace):
+
+```js
+const el = document.querySelector('my-element')
+
+const listener = (ev) => {
+    console.log('Namespaced event:', ev.type)
+}
+
+// Add listener for all 'my-element:*' events
+el.addEventListener(MyElement.event('*'), listener)
+
+// These will trigger the listener
+el.emit('click')    // Fires with type 'my-element:click'
+el.emit('change')   // Fires with type 'my-element:change'
+
+// This will NOT trigger the listener (not namespaced)
+el.dispatch('hello')
+
+// Remove the wildcard listener
+el.removeEventListener(MyElement.event('*'), listener)
+```
+
+#### Global wildcard: `'*'`
+
+Listen to **all** events dispatched through the element:
+
+```js
+const el = document.querySelector('my-element')
+
+const listener = (ev) => {
+    console.log('Any event:', ev.type)
+}
+
+// Add listener for ALL events
+el.addEventListener('*', listener)
+
+// ALL of these trigger the listener
+el.emit('custom')                      // my-element:custom
+el.dispatch('hello')                   // hello
+el.dispatchEvent(new Event('click'))   // click
+
+// Remove the global wildcard listener
+el.removeEventListener('*', listener)
+```
+
+
+### Hide undefined elements
+
+>
+> [!TIP]
+> Use the CSS [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined)
+> pseudo-class to hide elements until they have been defined in JS, to prevent
+> a [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/#awaiting-customelements.whendefined).
+>
+
+```css
+my-element:not(:defined) {
+  visibility: hidden;
+}
+```
+
+>
+> [!CAUTION]
+> JS must exist on the device for the custom elements to be defined.
+> A better option might be to [set a single class when everything is defined](https://www.abeautifulsite.net/posts/revisiting-fouce).
+>
+
 ### Emit a namespaced event from the instance
 
 ```js
@@ -160,13 +228,54 @@ const ev = ExampleComponent.event('click')
 ```
 
 ### Emit a plain string (not namespaced) event
-Don't namespace the event name, just emit the literal string.
+The `dispatch` method wont namespace the event name. It just emits the
+literal string.
 
 ```js
 const el = document.querySelector('my-element')
 
 // dispatch an event as plain string, not namespaced
 el?.dispatch('hello', { detail: 'some data again' })  // => `hello`
+```
+
+### Listen for all namespaced events from a component
+
+Use the pattern `Component.event('*')` to listen to all events emitted by a
+specific component with its namespace.
+
+```js
+const el = document.querySelector('my-element')
+
+// Listen to all namespaced events from this component
+el?.addEventListener(MyElement.event('*'), ev => {
+    console.log('Caught namespaced event:', ev.type)
+    // Will catch 'my-element:click', 'my-element:change', etc.
+})
+
+// This will trigger the wildcard listener
+el?.emit('click', { detail: 'clicked' })
+el?.emit('change', { detail: 'changed' })
+```
+
+### Listen for all events (global wildcard)
+
+Use the literal string `'*'` to listen to **all** events dispatched through
+the element, including both namespaced and non-namespaced events, as well as
+native DOM events.
+
+```js
+const el = document.querySelector('my-element')
+
+// Listen to ALL events on this element
+el?.addEventListener('*', ev => {
+    console.log('Caught any event:', ev.type)
+    // Will catch everything: 'my-element:click', 'hello', 'click', etc.
+})
+
+// All of these trigger the global wildcard listener
+el?.emit('custom')           // Triggers with type 'my-element:custom'
+el?.dispatch('hello')        // Triggers with type 'hello'
+el?.dispatchEvent(new Event('click'))  // Triggers with type 'click'
 ```
 
 ## Modules
@@ -261,6 +370,18 @@ Return the namespaced event name.
 ```js
 MyElement.event('change')  // => 'my-element:change'
 ```
+
+You can also use `'*'` as the event name to create a wildcard listener pattern:
+
+```js
+MyElement.event('*')  // => 'my-element:*'
+```
+
+This is used with `addEventListener` to listen to all namespaced events from
+a component.
+
+
+-------------------------------------------------------------------
 
 
 ### `qs`
