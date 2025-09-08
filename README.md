@@ -63,7 +63,28 @@ npm i -S @substrate-system/web-component
 * [use `.event(name)` to get the namespaced event type](#listen-for-events)
 * [extend the factory function to create a web component](#create-a-component)
 
-## Example
+## Examples
+
+### Hide undefined elements
+
+>
+> [!TIP]
+> Use the CSS [`:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined)
+> pseudo-class to hide elements until they have been defined in JS, to prevent
+> a [FOUCE](https://www.abeautifulsite.net/posts/flash-of-undefined-custom-elements/#awaiting-customelements.whendefined).
+>
+
+```css
+my-element:not(:defined) {
+  visibility: hidden;
+}
+```
+
+>
+> [!CAUTION]
+> JS must exist on the device for the custom elements to be defined.
+> A better option might be to [set a single class when everything is defined](https://www.abeautifulsite.net/posts/revisiting-fouce).
+>
 
 ### Create a component
 Use the factory function to create a new web component.
