@@ -123,6 +123,57 @@ export abstract class WebComponent extends window.HTMLElement {
 
         return this.dispatchEvent(event)
     }
+
+    /**
+     * Set ARIA attribute on this element.
+     *
+     * @param attribute The ARIA attribute name (without 'aria-' prefix)
+     * @param value The attribute value
+     */
+    setAria (attribute:string, value:string|boolean|null):void {
+        if (value === null) {
+            this.removeAttribute(`aria-${attribute}`)
+        } else {
+            this.setAttribute(`aria-${attribute}`, String(value))
+        }
+    }
+
+    /**
+     * Get ARIA attribute value from this element.
+     *
+     * @param attribute The ARIA attribute name (without 'aria-' prefix)
+     * @returns The attribute value or null if not set
+     */
+    getAria (attribute:string):string|null {
+        return this.getAttribute(`aria-${attribute}`)
+    }
+
+    /**
+     * Set the accessible label for this element.
+     *
+     * @param label The accessible label text
+     */
+    setLabel (label:string):void {
+        this.setAria('label', label)
+    }
+
+    /**
+     * Set the accessible description for this element.
+     *
+     * @param description The accessible description text
+     */
+    setDescription (description:string):void {
+        this.setAria('describedby', description)
+    }
+
+    /**
+     * Set focus to this element with optional focus options.
+     *
+     * @param options Focus options
+     */
+    focus (options?:FocusOptions):void {
+        super.focus(options)
+    }
 }
 
 function eventName (namespace:string, evType:string) {

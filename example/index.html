@@ -3,14 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example</title>
+    <title>Web Component Accessibility Example</title>
 </head>
 <body>
-    <div class="last-event">
-      The last event:
-      <div class="last-event-content"></div>
-    </div>
+    <header>
+        <h1>Web Component Accessibility Example</h1>
+        <p>This example demonstrates accessible web component patterns.</p>
+    </header>
+
+    <main>
+        <section aria-labelledby="component-section">
+            <h2 id="component-section">Interactive Component</h2>
+            <!-- The web component will be inserted here -->
+        </section>
+
+        <section aria-labelledby="events-section">
+            <h2 id="events-section">Event Output</h2>
+            <div class="last-event" role="log" aria-live="polite" aria-label="Event activity log">
+                <div class="last-event-content" aria-describedby="event-description">
+                    <p id="event-description">No events triggered yet. Click a button to see event output.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script type="module" src="./index.ts"></script>
-  </body>
+</body>
 </html>

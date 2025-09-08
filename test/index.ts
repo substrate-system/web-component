@@ -111,6 +111,37 @@ test('all done', () => {
     window.testsFinished = true
 })
 
+test('accessibility utilities', t => {
+    t.plan(6)
+    const el = document.querySelector('test-component')
+
+    // Test ARIA utilities
+    el?.setAria('label', 'Test component')
+    t.equal(el?.getAttribute('aria-label'), 'Test component',
+        'should set aria-label attribute')
+
+    t.equal(el?.getAria('label'), 'Test component',
+        'should get aria-label value')
+
+    // Test convenience methods
+    el?.setLabel('New label')
+    t.equal(el?.getAttribute('aria-label'), 'New label',
+        'setLabel should update aria-label')
+
+    el?.setDescription('help-id')
+    t.equal(el?.getAttribute('aria-describedby'), 'help-id',
+        'setDescription should set aria-describedby')
+
+    // Test removing ARIA attributes
+    el?.setAria('label', null)
+    t.equal(el?.hasAttribute('aria-label'), false,
+        'should remove aria attribute when set to null')
+
+    // Test focus method exists
+    t.ok(typeof el?.focus === 'function',
+        'should have focus method available')
+})
+
 declare global {
     interface HTMLElementTagNameMap {
         'test-component': TestComponent;

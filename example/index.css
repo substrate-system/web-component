@@ -1,12 +1,142 @@
+/* Accessibility improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus indicators */
+button:focus {
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 95, 204, 0.3);
+}
+
+button:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    button:focus {
+        outline: 3px solid;
+        outline-offset: 2px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Layout improvements */
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1rem;
+}
+
+main {
+    display: grid;
+    gap: 2rem;
+}
+
+section {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+h1, h2 {
+    color: #333;
+    margin-top: 0;
+}
+
+/* Button improvements */
+button {
+    background: #0066cc;
+    color: white;
+    border: 1px solid #0052a3;
+    padding: 0.75rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 0.5rem 0.5rem 0.5rem 0;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background: #0052a3;
+}
+
+button:active {
+    background: #003d7a;
+}
+
+.button-help {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0.25rem 0 1rem 0;
+    font-style: italic;
+}
+
 .last-event {
     width: fit-content;
-    padding: 2rem;
-    border: 2px solid;
-    min-width: 10rem;
-    min-height: 6rem;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    min-width: 20rem;
+    min-height: 4rem;
+    background: #f9f9f9;
+    border-radius: 0.5rem;
+}
+
+.last-event-content {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+.last-event-content strong {
+    display: inline-block;
+    min-width: 100px;
+    font-weight: 600;
+}
+
+.last-event-content code {
+    background: #e1e1e1;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.125rem;
+    font-family: 'Courier New', monospace;
 }
 
 my-element {
     display: block;
     width: fit-content;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: white;
+}
+
+my-element p {
+    margin-top: 0;
+    font-weight: 500;
 }

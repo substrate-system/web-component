@@ -42,6 +42,12 @@ This extends the native `HTMLElement`, and adds
   * [element.qs & element.qsa](#elementqs--elementqsa)
 - [Misc](#misc)
   * [`/util`](#util)
+- [Accessibility](#accessibility)
+  * [ARIA Utilities](#aria-utilities)
+  * [Accessible Example](#accessible-example)
+  * [Best Practices](#best-practices)
+  * [Focus Management](#focus-management)
+  * [Live Regions](#live-regions)
 - [Develop](#develop)
 - [Test](#test)
 - [See also](#see-also)
@@ -350,6 +356,73 @@ import { define } from '@substrate-system/web-component/util'
 function define (name:string, element:CustomElementConstructor) {
 ```
 
+
+---------------------------------------------------------------------
+
+## Accessibility
+
+This web component library includes built-in accessibility utilities to help you create inclusive components.
+
+### ARIA Utilities
+
+The `WebComponent` base class provides several methods for managing ARIA attributes:
+
+```js
+// Set ARIA attributes
+element.setAria('label', 'Click to submit form')
+element.setAria('expanded', 'false')
+element.setAria('describedby', 'help-text')
+
+// Get ARIA attributes
+const label = element.getAria('label')
+
+// Convenience methods
+element.setLabel('Submit button')
+element.setDescription('This will submit the form')
+```
+
+### Accessible Example
+
+The example demonstrates several accessibility best practices:
+
+- **Semantic HTML**: Uses proper headings, sections, and landmarks
+- **ARIA attributes**: Includes `aria-live` regions for dynamic content
+- **Focus management**: Visible focus indicators and logical tab order
+- **Screen reader support**: Descriptive labels and live announcements
+- **Keyboard navigation**: All interactive elements are keyboard accessible
+
+### Best Practices
+
+When creating accessible web components:
+
+1. **Use semantic HTML** elements when possible
+2. **Provide descriptive labels** for all interactive elements
+3. **Implement focus management** for complex interactions
+4. **Use ARIA attributes** to enhance semantics
+5. **Test with screen readers** and keyboard navigation
+6. **Ensure sufficient color contrast** (4.5:1 for normal text)
+7. **Support reduced motion** preferences
+
+### Focus Management
+
+```js
+// Focus an element with options
+element.focus({ preventScroll: true })
+
+// Manage focus within component
+const firstButton = element.qs('button')
+firstButton?.focus()
+```
+
+### Live Regions
+
+For dynamic content updates, use ARIA live regions:
+
+```html
+<div role="log" aria-live="polite" aria-label="Activity log">
+  <!-- Dynamic content updates here -->
+</div>
+```
 
 ---------------------------------------------------------------------
 
