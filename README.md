@@ -418,6 +418,27 @@ const buttons = myElement?.qsa('button')
 
 ## Misc
 
+### Some Notes
+
+> Attributes (strings, numbers, booleans) tend to reflect, properties don’t.
+
+That means,
+
+* Attributes typically reflect to properties &mdash; when you set
+  `count="5"` in HTML, the element's `.count` property mirrors that value
+  (often converting the string to a number).
+* Properties typically DON'T reflect back to attributes &mdash; when you set
+  element.count = 10 in JavaScript, it usually doesn't update the HTML
+  attribute to count="10"
+
+
+See [The killer feature of Web Components](https://daverupert.com/2025/10/custom-elements-manifest-killer-feature/).
+
+
+
+-------
+
+
 ### `/util`
 
 Various functions.
