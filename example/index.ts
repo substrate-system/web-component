@@ -13,11 +13,7 @@ declare global {
 // use the factory function
 class MyElement extends WebComponent.create('my-element') {
     connectedCallback () {
-        this.innerHTML = `<div class="example">
-            <p>hello example element</p>
-            <button class="namespaced">emit a namespaced event</button>
-            <button class="regular">emit a regular event</button>
-        </div>`
+        this.render()
 
         this.querySelector('button.namespaced')?.addEventListener('click', ev => {
             ev.preventDefault()
@@ -30,6 +26,14 @@ class MyElement extends WebComponent.create('my-element') {
             ev.stopPropagation()
             this.dispatch('click', { detail: 'some more data' })
         })
+    }
+
+    render () {
+        this.innerHTML = `<div class="example">
+            <p>hello example element</p>
+            <button class="namespaced">emit a namespaced event</button>
+            <button class="regular">emit a regular event</button>
+        </div>`
     }
 }
 
