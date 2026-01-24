@@ -21,7 +21,7 @@ export abstract class WebComponent extends window.HTMLElement {
      */
     private _namespacedWildcardListeners:Set<WildcardListenerEntry> = new Set()
 
-    static create (elementName:string):{
+    static create (elementName:string):typeof WebComponent & {
         new (...args:any[]):WebComponent;
         TAG:string;
         define: typeof WebComponent.define;
@@ -64,7 +64,11 @@ export abstract class WebComponent extends window.HTMLElement {
      * @param  {string} oldValue The old attribute value
      * @param  {string} newValue The new attribute value
      */
-    async attributeChangedCallback (name:string, oldValue:string, newValue:string) {
+    async attributeChangedCallback (
+        name:string,
+        oldValue:string,
+        newValue:string
+    ):Promise<void> {
         const handler = this[`handleChange_${name}`]
         if (handler) {
             await handler.call(this, oldValue, newValue)

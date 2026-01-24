@@ -1,7 +1,7 @@
 import './index.css'
 import { WebComponent } from '../src/index.js'
 import Debug from '@substrate-system/debug'
-const debug = Debug()
+const debug = Debug(import.meta.env.dev)
 
 // for docuement.querySelector
 declare global {
