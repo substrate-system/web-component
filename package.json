@@ -55,7 +55,7 @@
     "build-cjs:min": "esbuild src/*.ts --format=cjs --minify --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --out-extension:.js=.min.cjs --sourcemap",
     "build-esm": "esbuild src/*.ts --format=esm --metafile=dist/meta.json --keep-names --tsconfig=tsconfig.build.json --outdir=./dist --sourcemap && tsc --emitDeclarationOnly --project tsconfig.build.json --outDir dist",
     "build-esm:min": "esbuild ./src/*.ts --format=esm --keep-names --bundle --tsconfig=tsconfig.build.json --minify --out-extension:.js=.min.js --outdir=./dist --sourcemap",
-    "build-example": "mkdir -p ./public && rm -rf ./public/* && VITE_DEBUG_MODE=staging vite --mode staging --base=\"/web-component\" build",
+    "build-example": "mkdir -p ./public && rm -rf ./public/* && vite --mode staging --base=\"/web-component\" build",
     "build-docs": "typedoc --tsconfig tsconfig.build.json ./src/index.ts",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && npm run build-esm && npm run build-esm:min && npm run build-cjs:min",
     "start": "vite",
@@ -66,9 +66,9 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@substrate-system/debug": "^0.9.1",
-    "@substrate-system/dom": "^0.1.7",
-    "@substrate-system/tapout": "^0.0.34",
+    "@substrate-system/debug": "^0.9.52",
+    "@substrate-system/dom": "^0.1.13",
+    "@substrate-system/tapout": "^0.0.33",
     "@substrate-system/tapzero": "^0.10.13",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
@@ -84,7 +84,7 @@
     "tape-run": "^11.0.0",
     "typedoc": "^0.28.1",
     "typescript": "^5.8.3",
-    "vite": "^7.0.2"
+    "vite": "^7.3.1"
   },
   "author": "nichoth <nichoth@nichoth.com> (https://nichoth.com)",
   "license": "SEE LICENSE IN LICENSE",
