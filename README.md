@@ -50,6 +50,7 @@ This extends the native `HTMLElement`, and adds
   * [element.qs & element.qsa](#elementqs--elementqsa)
     + [example](#example)
 - [Misc](#misc)
+  * [Some Notes](#some-notes)
   * [`/util`](#util)
     + [`qs`](#qs-1)
     + [`qsa`](#qsa-1)
