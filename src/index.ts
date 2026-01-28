@@ -1,3 +1,5 @@
+import { match as _match } from './util.js'
+
 interface WildcardListenerEntry {
     listener:EventListenerOrEventListenerObject
     options?:boolean|AddEventListenerOptions
@@ -6,6 +8,10 @@ interface WildcardListenerEntry {
 export abstract class WebComponent extends window.HTMLElement {
     static TAG:string = ''
     TAG:string = ''
+
+    static match (el:HTMLElement):HTMLElement|null {
+        return _match(el, this.TAG)
+    }
 
     /**
      * Store global wildcard listeners (listen to all events)
